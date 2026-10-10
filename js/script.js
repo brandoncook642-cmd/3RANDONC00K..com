@@ -298,6 +298,9 @@ chatDialog.innerHTML = `
         <button type="button">What experience do I have?</button>
         <button type="button">What are my technical skills?</button>
         <button type="button">What am I studying?</button>
+        <button type="button">What IT skills am I learning?</button>
+        <button type="button">Have I led a team?</button>
+        <button type="button">What is my career goal?</button>
     </div>
     <form class="portfolio-chat-form">
         <label class="visually-hidden" for="portfolio-chat-input">Your question</label>
@@ -316,6 +319,14 @@ const chatForm = chatDialog.querySelector('.portfolio-chat-form');
 const chatInput = chatDialog.querySelector('#portfolio-chat-input');
 const chatStatus = chatDialog.querySelector('.portfolio-chat-status');
 const chatHistory = [];
+const quickAnswers = new Map([
+    ['what experience do i have', 'I have 8 years of hospitality experience, working at Columbus Coffee, Four Points by Sheraton Auckland, Novotel Tainui Hamilton, and Ibis Tainui Hamilton. My roles covered cafe and food-and-beverage service. [Experience]'],
+    ['what are my technical skills', 'My listed hospitality and operations skills include Micros Simphony POS, cash handling, stock ordering through online portals such as PurchasePlus, Microsoft Excel for stocktakes and invoices, barista training, and beverage service. [Skills]'],
+    ['what am i studying', 'I am studying toward a Level 5 Certificate in Information Technology at Waikato Institute of Technology. My four modules cover IT operations, Python programming, interactive digital media, and information systems. [Education]'],
+    ['what it skills am i learning', 'I am learning PC hardware and software, operating systems, networking, IT security and troubleshooting, Python, HTML and CSS, user experience and interface design, and information systems. [Education]'],
+    ['have i led a team', 'Yes. My Skills page says I led 3-4 staff per shift and delegated tasks during service. [Skills]'],
+    ['what is my career goal', 'I hope to work in web design and create high-quality websites for businesses and personal use that are easy for clients to use. [About]']
+]);
 
 function addChatMessage(text, role) {
     const message = document.createElement('div');
@@ -357,6 +368,15 @@ chatForm.addEventListener('submit', async (event) => {
     chatHistory.push({ role: 'user', text: message });
     addChatMessage(message, 'user');
     chatInput.value = '';
+
+    const quickAnswer = quickAnswers.get(message.toLowerCase().replace(/[?.!]/g, '').trim());
+    if (quickAnswer) {
+        addChatMessage(quickAnswer, 'assistant');
+        chatHistory.push({ role: 'model', text: quickAnswer });
+        chatStatus.textContent = '';
+        return;
+    }
+
     chatStatus.textContent = 'Thinking...';
     chatForm.querySelector('button[type="submit"]').disabled = true;
 

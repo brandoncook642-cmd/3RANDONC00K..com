@@ -130,29 +130,34 @@ async function answerQuestion(request, env) {
     ].join("\n\n");
 
     const model = env.GEMINI_MODEL || "gemini-3.8-flash";
+    const providerUrl = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`;
+    const providerBody = JSON.stringify({
+        systemInstruction: { parts: [{ text: systemInstruction }] },
+        contents: history.map((item) => ({
+            role: item.role,
+            parts: [{ text: item.text }]
+        })),
+        generationConfig: {
+            maxOutputTokens: 1200,
+            thinkingConfig: { thinkingLevel: "LOW" }
+        }
+    });
     let providerResponse;
     try {
-        providerResponse = await fetch(
-            `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`,
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "x-goog-api-key": env.GEMINI_API_KEY
-                },
-                body: JSON.stringify({
-                    systemInstruction: { parts: [{ text: systemInstruction }] },
-                    contents: history.map((item) => ({
-                        role: item.role,
-                        parts: [{ text: item.text }]
-                    })),
-                    generationConfig: {
-                        maxOutputTokens: 1200,
-                        thinkingConfig: { thinkingLevel: "LOW" }
-                    }
-                })
-            }
-        );
+        const providerRequest = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "x-goog-api-key": env.GEMINI_API_KEY
+            },
+            body: providerBody
+        };
+
+        providerResponse = await fetch(providerUrl, providerRequest);
+        if (providerResponse.status === 503) {
+            await new Promise((resolve) => setTimeout(resolve, 500));
+            providerResponse = await fetch(providerUrl, providerRequest);
+        }
     } catch {
         return jsonResponse({ error: "The AI service could not be reached." }, 502);
     }

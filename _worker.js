@@ -146,7 +146,10 @@ async function answerQuestion(request, env) {
                         role: item.role,
                         parts: [{ text: item.text }]
                     })),
-                    generationConfig: { temperature: 0.2, maxOutputTokens: 600 }
+                    generationConfig: {
+                        maxOutputTokens: 1200,
+                        thinkingConfig: { thinkingLevel: "LOW" }
+                    }
                 })
             }
         );

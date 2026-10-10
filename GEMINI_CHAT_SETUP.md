@@ -9,7 +9,7 @@ The chat uses a Cloudflare Pages advanced-mode Worker so the Gemini API key stay
 3. Use no build command and set the build output directory to `.`. Keep `_worker.js` in that output directory so Pages uses advanced mode.
 4. Add a secret named `GEMINI_API_KEY` in the Pages project's Settings under Variables and Secrets. Create the key through Google AI Studio; do not put it in site JavaScript, HTML, or this file.
 5. Optionally add `GEMINI_MODEL` as a regular variable. It defaults to `gemini-3.8-flash`.
-6. Redeploy the project. The home page is available at `/` and `/html/index.html`.
+6. Redeploy the project. Future pushes to `main` trigger new deployments. The home page is available at `/` and `/html/index.html`.
 
 The project needs a Gemini API key and an account with API access. API usage may incur charges. Because the chat endpoint is public, set a restrictive Gemini API quota and configure Cloudflare rate limiting for `/api/chat` before sharing the site widely.
 

@@ -1,4 +1,4 @@
-﻿//scroll sections
+?//scroll sections
 window.onscroll = () => {
     //sticky header
     let header = document.querySelector('header');
@@ -276,8 +276,8 @@ if (carousel) {
 const chatLauncher = document.createElement('button');
 chatLauncher.className = 'portfolio-chat-launcher';
 chatLauncher.type = 'button';
-chatLauncher.setAttribute('aria-label', 'Ask my portfolio');
-chatLauncher.innerHTML = '<i class="fa-regular fa-comments" aria-hidden="true"></i><span>Ask my portfolio</span>';
+chatLauncher.setAttribute('aria-label', 'Chat with me');
+chatLauncher.innerHTML = '<i class="fa-regular fa-comments" aria-hidden="true"></i><span>Chat with me</span>';
 
 const chatDialog = document.createElement('dialog');
 chatDialog.className = 'portfolio-chat';
@@ -286,7 +286,7 @@ chatDialog.innerHTML = `
     <header class="portfolio-chat-header">
         <div>
             <p class="portfolio-chat-kicker">BRANDON'S PORTFOLIO</p>
-            <h2 id="portfolio-chat-title">Ask my notebook</h2>
+            <h2 id="portfolio-chat-title">How can I help?</h2>
         </div>
         <button class="portfolio-chat-close" type="button" aria-label="Close chat">
             <i class="fa-solid fa-xmark" aria-hidden="true"></i>
@@ -320,10 +320,10 @@ const chatInput = chatDialog.querySelector('#portfolio-chat-input');
 const chatStatus = chatDialog.querySelector('.portfolio-chat-status');
 const chatHistory = [];
 const quickAnswers = new Map([
-    ['what experience do i have', 'I have 8 years of hospitality experience, working at Columbus Coffee, Four Points by Sheraton Auckland, Novotel Tainui Hamilton, and Ibis Tainui Hamilton. My roles covered cafe and food-and-beverage service. [Experience]'],
-    ['what are my technical skills', 'My listed hospitality and operations skills include Micros Simphony POS, cash handling, stock ordering through online portals such as PurchasePlus, Microsoft Excel for stocktakes and invoices, barista training, and beverage service. [Skills]'],
-    ['what am i studying', 'I am studying toward a Level 5 Certificate in Information Technology at Waikato Institute of Technology. My four modules cover IT operations, Python programming, interactive digital media, and information systems. [Education]'],
-    ['what it skills am i learning', 'I am learning PC hardware and software, operating systems, networking, IT security and troubleshooting, Python, HTML and CSS, user experience and interface design, and information systems. [Education]'],
+    ['what experience do i have', 'I have 8 years of hospitality experience, working at Columbus Coffee, Four Points by Sheraton Auckland, Novotel Tainui Hamilton, and Ibis Tainui Hamilton. My roles c[...]
+    ['what are my technical skills', 'My listed hospitality and operations skills include Micros Simphony POS, cash handling, stock ordering through online portals such as PurchasePlus, Microsoft Exce[...]
+    ['what am i studying', 'I am studying toward a Level 5 Certificate in Information Technology at Waikato Institute of Technology. My four modules cover IT operations, Python programming, interactiv[...]
+    ['what it skills am i learning', 'I am learning PC hardware and software, operating systems, networking, IT security and troubleshooting, Python, HTML and CSS, user experience and interface design[...]
     ['have i led a team', 'Yes. My Skills page says I led 3-4 staff per shift and delegated tasks during service. [Skills]'],
     ['what is my career goal', 'I hope to work in web design and create high-quality websites for businesses and personal use that are easy for clients to use. [About]']
 ]);

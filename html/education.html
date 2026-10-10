@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Education | Brandon Cook</title>
+
+    <script>
+        try {
+            document.documentElement.classList.toggle('light-mode', localStorage.getItem('theme') === 'light');
+        } catch { }
+    </script>
+    <link rel="stylesheet" href="../css/style.css">
+
+    <!--icons-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- header -->
+    <header class="header">
+        <a href="index.html" class="logo">3RAND0N C00K</a>
+
+        <button class="menu-icon" aria-label="Open navigation" aria-expanded="false">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <nav class="navbar">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="skills.html">Skills</a>
+            <a href="experience.html">Experience</a>
+            <a href="education.html" class="active" aria-current="page">Education</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+
+        <div class="button">
+            <a href="../CV.pdf/B Cook - CV.pdf" class="btn" target="_blank" rel="noopener noreferrer">My CV</a>
+        </div>
+
+        <button class="theme-toggle" type="button" aria-label="Toggle theme">
+            <i class="fa-solid fa-lightbulb"></i>
+        </button>
+    </header>
+
+    <section class="education" id="education">
+        <div class="education-content">
+            <h1><span>My Education</span></h1>
+            <p>
+                After working in hospitality for several years, I decided it was time for a change.
+                I am now a student at the Waikato Institute of Technology, and the modules below show the skills I am
+                building this semester as I work toward my Level 5 Certificate in Information Technology.
+            </p>
+
+            <dl class="education-overview">
+                <div>
+                    <dt>Qualification</dt>
+                    <dd>Level 5 Certificate in Information Technology</dd>
+                </div>
+                <div>
+                    <dt>Institution</dt>
+                    <dd>Waikato Institute of Technology</dd>
+                </div>
+                <div>
+                    <dt>Current modules</dt>
+                    <dd>4 courses</dd>
+                </div>
+            </dl>
+
+            <div class="collapsible-boxes">
+                <input type="checkbox" name="checkbox" id="box1">
+                <div class="collapsible-box">
+                    <label for="box1" class="title">COMP501 (IT Operations)</label>
+                    <p class="module-summary">PC hardware · Operating systems · Networking</p>
+                    <label for="box1" class="close"></label>
+                    <div class="content">
+                        <img class="module-image" src="../images/it ops.png" alt="Computer hardware and IT operations">
+                        <p class="module-aim">AIM: To introduce the student to computer hardware and software, as well
+                            as operating
+                            systems,
+                            networking concepts, mobile devices, IT security, and troubleshooting
+
+                        </p>
+                        <p>
+                            This class covers the fundamentals of computer software, hardware and cybersecurity. So far
+                            we have learnt briefly how to disassemble and reassemble a PC as well as how to put together
+                            an ethernet cable and even how to install Windows on a computer.
+                        </p>
+
+                    </div>
+                </div>
+
+                <input type="checkbox" name="checkbox" id="box2">
+                <div class="collapsible-box">
+                    <label for="box2" class="title">COMP502 (Python Programming)</label>
+                    <p class="module-summary">Python · Program design · Problem solving</p>
+                    <label for="box2" class="close"></label>
+                    <div class="content">
+                        <img class="module-image" src="../images/program.png" alt="Python programming">
+                        <p class="module-aim">AIM: To apply the principles of software development to create simple
+                            working
+                            applications and use problem-solving and decision-making techniques to provide innovative
+                            and
+                            timely Information Technology outcomes
+
+                        </p>
+                        <p>
+                            This is where I learn about Python and how to use it to create programs for everyday use, as
+                            well as the different components involved. We have explored graphics with Turtle and used
+                            tools such as booleans and variables to build functions for tasks like calculating the
+                            circumference of a circle and working out how much a food bill will cost after a tip is
+                            added.
+                        </p>
+                    </div>
+                </div>
+
+                <input type="checkbox" name="checkbox" id="box3">
+                <div class="collapsible-box">
+                    <label for="box3" class="title">COMP506 (Interactive Digital Media)</label>
+                    <p class="module-summary">UX and interface design · Accessible digital media</p>
+                    <label for="box3" class="close"></label>
+                    <div class="content">
+                        <img class="module-image" src="../images/digital media.png" alt="Digital media and web design">
+                        <p class="module-aim">AIM: To apply concepts of business analysis, user experience and interface
+                            design to
+                            create accessible interactive digital media.
+
+                        </p>
+                        <p>
+                            This module covers the basic knowledge and fundamentals of web design and digital media. We
+                            have been learning about tools such as HTML and CSS, which are used to build websites like
+                            this one. HTML acts as the structure of a website, while CSS adds the styling that makes it
+                            look polished and professional. This class helps me better understand how to create
+                            websites, which is the type of work I hope to do for a career. </p>
+
+                    </div>
+                </div>
+
+                <input type="checkbox" name="checkbox" id="box4">
+                <div class="collapsible-box">
+                    <label for="box4" class="title">INFO507 (Fundamentals of Information Systems)</label>
+                    <p class="module-summary">Business systems · Data modelling · Development life cycles</p>
+                    <label for="box4" class="close"></label>
+                    <div class="content">
+                        <img class="module-image" src="../images/DataData.svg" alt="Data analysis">
+
+                        <p class="module-aim">AIM: To apply the fundamentals of information system
+                            concepts and practice including business concepts, development life cycles, data modelling
+                            and administration that supports and enhances organisational processes and systems.
+
+                        </p>
+                        <p>
+                            In this module, I develop an understanding of data modelling and information systems and how
+                            they are used. It also explains how IT is incorporated to support and enhance everyday
+                            businesses as part of their processes and systems.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 BRANDON.com. All rights reserved.</p>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

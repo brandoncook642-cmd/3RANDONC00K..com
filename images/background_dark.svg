@@ -1,0 +1,93 @@
+<svg viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bgGlow" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#0a3a63"/>
+      <stop offset="55%" stop-color="#031a38"/>
+      <stop offset="100%" stop-color="#010a1c"/>
+    </radialGradient>
+    <radialGradient id="coreGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#bfe6ff" stop-opacity="0.28"/>
+      <stop offset="45%" stop-color="#4fc3ff" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#4fc3ff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="scanFade" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7fe3ff" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#7fe3ff" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#7fe3ff" stop-opacity="0"/>
+    </linearGradient>
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse" patternTransform="translate(30,30)">
+      <path d="M60,0 L0,0 L0,60" fill="none" stroke="#ffffff" stroke-opacity="0.035" stroke-width="1"/>
+    </pattern>
+    <radialGradient id="vignette" cx="50%" cy="50%" r="65%">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="35%" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.9"/>
+    </radialGradient>
+  </defs>
+
+  <rect x="0" y="0" width="1600" height="900" fill="url(#bgGlow)"/>
+  <rect x="0" y="0" width="1600" height="900" fill="url(#grid)"/>
+  <circle cx="800" cy="450" r="420" fill="url(#coreGlow)"/>
+
+  <!-- HUD corner brackets -->
+  <g stroke="#bfe9ff" stroke-opacity="0.75" stroke-width="2" fill="none">
+    <path d="M120,180 L120,120 L180,120"/>
+    <path d="M1420,120 L1480,120 L1480,180"/>
+    <path d="M1480,720 L1480,780 L1420,780"/>
+    <path d="M180,780 L120,780 L120,720"/>
+  </g>
+
+  <!-- Sweeping accent curves, top and bottom -->
+  <g fill="none" stroke="#7fe3ff" stroke-opacity="0.55" stroke-width="2">
+    <path d="M100,150 Q800,50 1500,150"/>
+    <path d="M100,750 Q800,850 1500,750"/>
+  </g>
+
+  <!-- Sweeping accent curves, left and right edges -->
+  <g fill="none" stroke="#7fe3ff" stroke-opacity="0.55" stroke-width="2">
+    <path d="M150,100 Q50,450 150,800"/>
+    <path d="M1450,100 Q1550,450 1450,800"/>
+  </g>
+
+  <!-- Corner flourish curves -->
+  <g fill="none" stroke="#bfe9ff" stroke-opacity="0.5" stroke-width="1.5">
+    <path d="M50,260 Q50,50 260,50"/>
+    <path d="M1550,260 Q1550,50 1340,50"/>
+    <path d="M50,640 Q50,850 260,850"/>
+    <path d="M1550,640 Q1550,850 1340,850"/>
+  </g>
+
+  <!-- Segmented outer bezel ring (curved, gapped at cardinal points) -->
+  <g fill="none" stroke="#bfe9ff" stroke-opacity="0.67" stroke-width="2.5">
+    <path d="M1233.4,526.6 A440,440 0 0,1 876.6,883.4"/>
+    <path d="M723.4,883.4 A440,440 0 0,1 366.6,526.6"/>
+    <path d="M366.6,373.4 A440,440 0 0,1 723.4,16.6"/>
+    <path d="M876.6,16.6 A440,440 0 0,1 1233.4,373.4"/>
+  </g>
+
+  <!-- Reticle rings -->
+  <circle cx="800" cy="450" r="420" fill="none" stroke="#bfe9ff" stroke-opacity="0.7" stroke-width="2"/>
+  <circle cx="800" cy="450" r="240" fill="none" stroke="#bfe9ff" stroke-opacity="0.65" stroke-width="2"/>
+
+  <!-- Crosshair, gapped around the inner ring, clear of the center -->
+  <g stroke="#bfe9ff" stroke-opacity="0.7" stroke-width="2">
+    <path d="M800,30 L800,190"/>
+    <path d="M800,870 L800,710"/>
+    <path d="M380,450 L540,450"/>
+    <path d="M1220,450 L1060,450"/>
+  </g>
+
+  <!-- Cardinal tick marks, poking through the bezel gaps -->
+  <g stroke="#bfe9ff" stroke-opacity="0.75" stroke-width="2.5">
+    <path d="M800,30 L800,5"/>
+    <path d="M800,870 L800,895"/>
+    <path d="M1220,450 L1245,450"/>
+    <path d="M380,450 L355,450"/>
+  </g>
+
+  <!-- Ambient scan shimmer -->
+  <rect x="0" y="449" width="1600" height="1.5" fill="url(#scanFade)"/>
+
+  <!-- Vignette for text contrast -->
+  <rect x="0" y="0" width="1600" height="900" fill="url(#vignette)"/>
+</svg>

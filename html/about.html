@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Brandon Cook</title>
+
+    <script>
+        try {
+            document.documentElement.classList.toggle('light-mode', localStorage.getItem('theme') === 'light');
+        } catch { }
+    </script>
+    <link rel="stylesheet" href="../css/style.css">
+
+    <!--icons-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- header -->
+    <header class="header">
+        <a href="index.html" class="logo">3RAND0N C00K</a>
+
+        <button class="menu-icon" aria-label="Open navigation" aria-expanded="false">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <nav class="navbar">
+            <a href="index.html">Home</a>
+            <a href="about.html" class="active" aria-current="page">About</a>
+            <a href="skills.html">Skills</a>
+            <a href="experience.html">Experience</a>
+            <a href="education.html">Education</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+
+        <div class="button">
+            <a href="../CV.pdf/B Cook - CV.pdf" class="btn" target="_blank" rel="noopener noreferrer">My CV</a>
+        </div>
+
+        <button class="theme-toggle" type="button" aria-label="Toggle theme">
+            <i class="fa-solid fa-lightbulb"></i>
+        </button>
+
+    </header>
+
+    <section class="about" id="about">
+        <h2 class="heading">About Me</h2>
+
+
+        <div class="headshot-img">
+            <img src="../images/Headshot.jpg" alt="Brandon">
+            <span class="circle-spin"></span>
+        </div>
+
+        <div class="about-content">
+
+            <h3>PERSONAL STATEMENT:</h3>
+            <p>I am currently an IT student at Waikato Institute of Technology hoping to pursue a
+                career in the IT
+                field.
+                I have a newfound passion for programming and web development and I'm always looking to improve my
+                skills and learn new areas of Information Technology.</p>
+            <h3>PERSONAL OBJECTIVE:</h3>
+            <p>I would like to eventually work in web design and make websites for business and personal use that are of
+                a
+                high quality and are easy for the client to use and work with on a daily basis.</p>
+
+            <h3>MY INTERESTS:</h3>
+            <p>I love technology and how it can be used to improve day-to-day tasks at work or at home. I also enjoy
+                gaming on my Xbox, PC, or even my phone when I'm on the go.</p>
+        </div>
+
+
+
+
+
+    </section>
+
+    <footer>
+        <p>&copy; 2026 BRANDON.com. All rights reserved.</p>
+    </footer>
+
+
+
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

@@ -276,8 +276,8 @@ if (carousel) {
 const chatLauncher = document.createElement('button');
 chatLauncher.className = 'portfolio-chat-launcher';
 chatLauncher.type = 'button';
-chatLauncher.setAttribute('aria-label', 'I'm here to help!');
-chatLauncher.innerHTML = '<i class="fa-regular fa-comments" aria-hidden="true"></i><span>I'm here to help!</span>';
+chatLauncher.setAttribute('aria-label', 'Ask my portfolio');
+chatLauncher.innerHTML = '<i class="fa-regular fa-comments" aria-hidden="true"></i><span>Ask my portfolio</span>';
 
 const chatDialog = document.createElement('dialog');
 chatDialog.className = 'portfolio-chat';

@@ -158,7 +158,27 @@ async function answerQuestion(request, env) {
     }
 
     if (!providerResponse.ok) {
-        return jsonResponse({ error: "The AI service could not answer right now." }, 502);
+        const providerError = await providerResponse.json().catch(() => null);
+        const providerStatus = providerResponse.status;
+        console.error("Gemini API request failed", {
+            httpStatus: providerStatus,
+            reason: providerError?.error?.status || "unknown"
+        });
+
+        if (providerStatus === 400) {
+            return jsonResponse({ error: "Gemini rejected the request (HTTP 400). Check the model and request configuration." }, 502);
+        }
+        if (providerStatus === 401 || providerStatus === 403) {
+            return jsonResponse({ error: "Gemini denied API access. Check that GEMINI_API_KEY is valid and allowed to use the Gemini API." }, 502);
+        }
+        if (providerStatus === 404) {
+            return jsonResponse({ error: "The configured Gemini model was not found. Check GEMINI_MODEL." }, 502);
+        }
+        if (providerStatus === 429) {
+            return jsonResponse({ error: "Gemini's quota or rate limit was reached. Check your API quota and billing settings." }, 502);
+        }
+
+        return jsonResponse({ error: `Gemini returned HTTP ${providerStatus}. Check the Cloudflare function logs.` }, 502);
     }
 
     const result = await providerResponse.json();

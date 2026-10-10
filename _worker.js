@@ -7,6 +7,31 @@ const portfolioPages = [
     { path: "/html/contact.html", name: "Contact" }
 ];
 
+function selectPortfolioPages(question) {
+    const query = question.toLowerCase();
+    const selectedNames = new Set();
+
+    if (/\b(skill|skills|technical|professional|interpersonal|teamwork|leadership|inventory|pos|barista)\b/.test(query)) {
+        selectedNames.add("Skills");
+    }
+    if (/\b(experience|work|job|employment|hospitality|role|roles)\b/.test(query)) {
+        selectedNames.add("Experience");
+    }
+    if (/\b(education|study|studying|course|qualification|waikato|institute)\b/.test(query)) {
+        selectedNames.add("Education");
+    }
+    if (/\b(about|background|interest|interests|objective|career|goal|goals)\b/.test(query)) {
+        selectedNames.add("Home");
+        selectedNames.add("About");
+    }
+    if (/\b(contact|email|phone|call|reach)\b/.test(query)) {
+        selectedNames.add("Contact");
+    }
+
+    const relevantPages = portfolioPages.filter((page) => selectedNames.has(page.name));
+    return relevantPages.length ? relevantPages : portfolioPages;
+}
+
 function htmlToText(html) {
     return html
         .replace(/<(script|style|svg|nav|header|footer)\b[^>]*>[\s\S]*?<\/\1>/gi, " ")
@@ -68,7 +93,7 @@ async function answerQuestion(request, env) {
         return jsonResponse({ error: "Questions must be between 1 and 1000 characters." }, 400);
     }
 
-    const sourceResults = await Promise.all(portfolioPages.map(async (page) => {
+    const sourceResults = await Promise.all(selectPortfolioPages(message).map(async (page) => {
         const asset = await env.ASSETS.fetch(new Request(new URL(page.path, url.origin)));
         if (!asset.ok) {
             throw new Error("A portfolio page could not be loaded.");
@@ -121,7 +146,7 @@ async function answerQuestion(request, env) {
                         role: item.role,
                         parts: [{ text: item.text }]
                     })),
-                    generationConfig: { temperature: 0.2, maxOutputTokens: 1200 }
+                    generationConfig: { temperature: 0.2, maxOutputTokens: 600 }
                 })
             }
         );

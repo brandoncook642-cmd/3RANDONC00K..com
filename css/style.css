@@ -3669,6 +3669,44 @@ section.experience > p {
     color: var(--button-text-color);
 }
 
+.portfolio-chat-typing {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    min-width: 5.8rem;
+    min-height: 4.2rem;
+}
+
+.portfolio-chat-typing span {
+    width: 0.65rem;
+    height: 0.65rem;
+    border-radius: 50%;
+    background: var(--main-color);
+    animation: portfolio-chat-pulse 1s ease-in-out infinite;
+}
+
+.portfolio-chat-typing span:nth-child(2) {
+    animation-delay: 0.15s;
+}
+
+.portfolio-chat-typing span:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+@keyframes portfolio-chat-pulse {
+    0%,
+    60%,
+    100% {
+        opacity: 0.4;
+        transform: translateY(0);
+    }
+
+    30% {
+        opacity: 1;
+        transform: translateY(-0.35rem);
+    }
+}
+
 .portfolio-chat-prompts {
     display: flex;
     gap: 0.7rem;

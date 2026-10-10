@@ -360,6 +360,13 @@ chatForm.addEventListener('submit', async (event) => {
     chatStatus.textContent = 'Thinking...';
     chatForm.querySelector('button[type="submit"]').disabled = true;
 
+    const typingIndicator = document.createElement('div');
+    typingIndicator.className = 'portfolio-chat-message assistant portfolio-chat-typing';
+    typingIndicator.setAttribute('aria-hidden', 'true');
+    typingIndicator.innerHTML = '<span></span><span></span><span></span>';
+    chatMessages.append(typingIndicator);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+
     try {
         const response = await fetch('/api/chat', {
             method: 'POST',
@@ -382,6 +389,7 @@ chatForm.addEventListener('submit', async (event) => {
         addChatMessage(errorMessage, 'assistant');
         chatStatus.textContent = errorMessage;
     } finally {
+        typingIndicator.remove();
         chatForm.querySelector('button[type="submit"]').disabled = false;
         chatInput.focus();
     }

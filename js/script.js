@@ -375,9 +375,12 @@ chatForm.addEventListener('submit', async (event) => {
         addChatMessage(result.answer, 'assistant');
         chatHistory.push({ role: 'model', text: result.answer });
         chatStatus.textContent = '';
-    } catch {
-        addChatMessage('I could not reach the chat service. Please try again later.', 'assistant');
-        chatStatus.textContent = 'Chat service unavailable.';
+    } catch (error) {
+        const errorMessage = error instanceof Error && error.message !== 'Failed to fetch'
+            ? error.message
+            : 'I could not reach the chat service. Please try again later.';
+        addChatMessage(errorMessage, 'assistant');
+        chatStatus.textContent = errorMessage;
     } finally {
         chatForm.querySelector('button[type="submit"]').disabled = false;
         chatInput.focus();

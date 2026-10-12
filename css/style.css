@@ -3892,11 +3892,9 @@ section.experience > p {
     inset: calc(-1 * var(--trace-outset));
     border: 0;
     border-radius: 50%;
-    background-color: transparent;
-    background-image: url('../images/portrait-circuit-frame.svg?v=4');
-    background-position: center;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
+    background-color: var(--main-color);
+    -webkit-mask: url('../images/portrait-circuit-frame.svg?v=4') center / 100% 100% no-repeat;
+    mask: url('../images/portrait-circuit-frame.svg?v=4') center / 100% 100% no-repeat;
     transform-origin: center;
     animation: portraitOuterTurn 18s ease-in-out infinite alternate;
     filter: drop-shadow(0 0 4px color-mix(in srgb, var(--main-color) 55%, transparent));

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description"
-        content="A.S.G.A.R.D. is an Advanced Study Guide and Rapid Developer for course sources, revision, and assessment preparation.">
+        content="A.S.G.A.R.D. is an Advanced Study Guide And Research Decrypter for course sources, revision, and assessment preparation.">
     <title>A.S.G.A.R.D. | Study Hub</title>
     <script>
         try {
@@ -29,6 +29,7 @@
         <nav class="navbar" aria-label="A.S.G.A.R.D. workspace">
             <a href="#courses" class="active" aria-current="page">Courses</a>
             <a href="#sources">Sources</a>
+            <a href="notes.html">Notes</a>
             <a href="#study-session">Study session</a>
         </nav>
         <div class="button">
@@ -39,12 +40,18 @@
     <main class="study-page-main">
         <section class="study-heading" id="courses">
             <div>
-                <p class="study-kicker">ADVANCED STUDY GUIDE AND RAPID DEVELOPER</p>
+                <p class="study-kicker">ADVANCED STUDY GUIDE AND RESEARCH DECRYPTER</p>
                 <h1 id="course-title">My course</h1>
             </div>
             <label class="course-picker" for="course-select">
                 <span>ACTIVE COURSE</span>
-                <select id="course-select" aria-label="Choose a course"></select>
+                <div class="course-picker-controls">
+                    <select id="course-select" aria-label="Choose a course"></select>
+                    <button class="course-edit-button" id="rename-course-button" type="button"
+                        aria-label="Rename selected course" title="Rename selected course">
+                        <i class="fa-solid fa-pen" aria-hidden="true"></i>
+                    </button>
+                </div>
             </label>
         </section>
 
@@ -64,6 +71,27 @@
                 <input id="source-input" type="file" accept=".pdf,.txt,.md,application/pdf,text/plain,text/markdown"
                     multiple hidden>
                 <p class="source-hint">PDF, TXT, or Markdown. Up to 5 MB per file.</p>
+                <div class="source-folder-toolbar">
+                    <label for="source-folder-filter">FOLDER</label>
+                    <div class="source-folder-controls">
+                        <select id="source-folder-filter" aria-label="Filter sources by folder">
+                            <option value="all">All sources</option>
+                            <option value="unfiled">Unfiled</option>
+                        </select>
+                        <button class="source-folder-action" id="add-source-folder-button" type="button"
+                            aria-label="Add folder" title="Add folder">
+                            <i class="fa-solid fa-folder-plus" aria-hidden="true"></i>
+                        </button>
+                        <button class="source-folder-action" id="rename-source-folder-button" type="button"
+                            aria-label="Rename folder" title="Rename folder" disabled>
+                            <i class="fa-solid fa-pen" aria-hidden="true"></i>
+                        </button>
+                        <button class="source-folder-action" id="delete-source-folder-button" type="button"
+                            aria-label="Delete folder" title="Delete folder" disabled>
+                            <i class="fa-regular fa-trash-can" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
                 <div class="source-list" id="source-list" aria-live="polite"></div>
                 <div class="privacy-note">
                     <i class="fa-solid fa-lock" aria-hidden="true"></i>
@@ -125,6 +153,42 @@
             <div class="dialog-actions">
                 <button class="secondary-button" id="cancel-course-button" type="button">Cancel</button>
                 <button class="add-files-button" type="submit">Create course</button>
+            </div>
+        </form>
+    </dialog>
+    <dialog class="course-dialog" id="rename-course-dialog">
+        <form method="dialog">
+            <p class="study-kicker">EDIT COURSE</p>
+            <h2>Rename course</h2>
+            <label for="rename-course-name">Course name</label>
+            <input id="rename-course-name" maxlength="80" required>
+            <p class="course-rename-status" id="course-rename-status" role="status" aria-live="polite"></p>
+            <div class="dialog-actions">
+                <button class="add-files-button" type="submit" value="done">Done</button>
+            </div>
+        </form>
+    </dialog>
+    <dialog class="course-dialog" id="source-folder-dialog">
+        <form id="source-folder-form">
+            <p class="study-kicker" id="source-folder-dialog-kicker">NEW FOLDER</p>
+            <h2 id="source-folder-dialog-title">Add source folder</h2>
+            <label for="source-folder-name">Folder name</label>
+            <input id="source-folder-name" maxlength="80" required>
+            <p class="course-rename-status" id="source-folder-dialog-status" role="status" aria-live="polite"></p>
+            <div class="dialog-actions">
+                <button class="secondary-button" id="cancel-source-folder-button" type="button">Cancel</button>
+                <button class="add-files-button" type="submit">Save folder</button>
+            </div>
+        </form>
+    </dialog>
+    <dialog class="course-dialog" id="delete-source-folder-dialog">
+        <form method="dialog">
+            <p class="study-kicker">REMOVE FOLDER</p>
+            <h2>Delete this folder?</h2>
+            <p>Its sources will move to Unfiled. The source files will be kept.</p>
+            <div class="dialog-actions">
+                <button class="secondary-button" value="cancel">Cancel</button>
+                <button class="add-files-button" id="confirm-delete-source-folder" value="delete">Delete folder</button>
             </div>
         </form>
     </dialog>

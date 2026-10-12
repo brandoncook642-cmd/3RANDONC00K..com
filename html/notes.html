@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Write, organize, and review course notes with A.S.G.A.R.D.">
+    <title>Notes | A.S.G.A.R.D.</title>
+    <script>
+        try {
+            document.documentElement.classList.toggle('light-mode', localStorage.getItem('theme') === 'light');
+        } catch { }
+    </script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/study.css">
+    <link rel="stylesheet" href="../css/notes.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
+</head>
+
+<body class="study-page notes-page">
+    <header class="header">
+        <a href="study.html" class="logo">A.S.G.A.R.D.</a>
+        <button class="menu-icon" type="button" aria-label="Open navigation" aria-expanded="false">
+            <i class="fa-solid fa-bars" aria-hidden="true"></i>
+        </button>
+        <button class="theme-toggle" type="button" aria-label="Toggle theme">
+            <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>
+        </button>
+        <nav class="navbar" aria-label="A.S.G.A.R.D. workspace">
+            <a href="study.html">Study hub</a>
+            <a href="notes.html" class="active" aria-current="page">Notes</a>
+            <a href="study.html#study-session">Study session</a>
+        </nav>
+        <div class="button">
+            <button class="btn" id="new-note-button" type="button">
+                <i class="fa-solid fa-plus" aria-hidden="true"></i>
+                New note
+            </button>
+        </div>
+    </header>
+
+    <main class="notes-page-main">
+        <section class="notes-heading">
+            <div>
+                <p class="study-kicker">CAPTURE WHAT MATTERS</p>
+                <h1>Notes</h1>
+            </div>
+            <label class="notes-course-picker" for="notes-course-select">
+                <span>COURSE</span>
+                <select id="notes-course-select" aria-label="Choose the course for notes"></select>
+            </label>
+        </section>
+
+        <div class="notes-layout">
+            <aside class="notes-sidebar" aria-label="Your notes">
+                <label class="note-search">
+                    <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                    <span class="visually-hidden">Search notes</span>
+                    <input id="note-search-input" type="search" placeholder="Search notes..." autocomplete="off">
+                </label>
+                <div class="notes-list-heading">
+                    <span>RECENT NOTES</span>
+                    <span id="note-count">0</span>
+                </div>
+                <div class="notes-list" id="notes-list" aria-live="polite"></div>
+            </aside>
+
+            <section class="note-workspace" aria-label="Note editor">
+                <div class="note-toolbar">
+                    <span class="save-state" id="save-state" role="status" aria-live="polite">No note selected</span>
+                    <div class="note-actions">
+                        <button class="notes-icon-button" id="preview-note-button" type="button" title="Preview note"
+                            aria-label="Preview note" disabled>
+                            <i class="fa-regular fa-eye" aria-hidden="true"></i>
+                        </button>
+                        <button class="notes-icon-button" id="export-note-button" type="button"
+                            title="Download as Markdown" aria-label="Download as Markdown" disabled>
+                            <i class="fa-solid fa-download" aria-hidden="true"></i>
+                        </button>
+                        <button class="notes-icon-button delete-note-button" id="delete-note-button" type="button"
+                            title="Delete note" aria-label="Delete note" disabled>
+                            <i class="fa-regular fa-trash-can" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="note-editor" id="note-editor" hidden>
+                    <label class="visually-hidden" for="note-title-input">Note title</label>
+                    <input id="note-title-input" class="note-title-input" maxlength="160" placeholder="Untitled note">
+                    <div class="note-meta">
+                        <span id="note-course-label"></span>
+                        <span id="note-updated-label"></span>
+                    </div>
+                    <label class="visually-hidden" for="note-content-input">Note content</label>
+                    <textarea id="note-content-input" class="note-content-input" spellcheck="true"
+                        placeholder="Start writing... Use plain text or Markdown. Changes save automatically."></textarea>
+                    <pre class="note-preview" id="note-preview" hidden></pre>
+                    <div class="note-footer">
+                        <span id="note-word-count">0 words</span>
+                        <span>Ctrl+S to save</span>
+                    </div>
+                </div>
+
+                <div class="notes-empty-state" id="notes-empty-state">
+                    <span class="empty-mark" aria-hidden="true"><i class="fa-regular fa-note-sticky"></i></span>
+                    <h2>Your notes, your thinking.</h2>
+                    <p>Create a note to get started.</p>
+                    <button class="add-files-button" id="empty-new-note-button" type="button">
+                        <i class="fa-solid fa-plus" aria-hidden="true"></i>
+                        Create a note
+                    </button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <dialog class="course-dialog delete-note-dialog" id="delete-note-dialog">
+        <form method="dialog">
+            <p class="study-kicker">REMOVE NOTE</p>
+            <h2>Delete this note?</h2>
+            <p>This action cannot be undone.</p>
+            <div class="dialog-actions">
+                <button class="secondary-button" value="cancel">Cancel</button>
+                <button class="add-files-button confirm-delete-button" id="confirm-delete-button" value="delete">Delete
+                    note</button>
+            </div>
+        </form>
+    </dialog>
+
+    <p class="visually-hidden" id="notes-status" role="status" aria-live="polite"></p>
+    <script src="../js/script.js"></script>
+    <script src="../js/notes.js"></script>
+</body>
+
+</html>

@@ -1,6 +1,6 @@
 # A.S.G.A.R.D. Setup
 
-A.S.G.A.R.D. means Advanced Study Guide and Rapid Developer. It uses the Cloudflare Pages Worker so the Gemini API key stays on the server. Course names and uploaded files are stored in this browser's IndexedDB, not in the repository or Cloudflare storage. When you ask a question, the selected source files are sent through the Worker to Gemini. They are not retained by this site.
+A.S.G.A.R.D. means Advanced Study Guide And Research Decrypter. It uses the Cloudflare Pages Worker so the Gemini API key stays on the server. Course names, uploaded files, and notes are stored in this browser's IndexedDB, not in the repository or Cloudflare storage. Notes autosave locally and can be downloaded as Markdown. When you ask a study question, the selected source files are sent through the Worker to Gemini. They are not retained by this site.
 
 ## Deploy on Cloudflare Pages
 
@@ -11,7 +11,7 @@ A.S.G.A.R.D. means Advanced Study Guide and Rapid Developer. It uses the Cloudfl
 5. Optionally add `GEMINI_MODEL` as a regular variable. It defaults to `gemini-3.8-flash`.
 6. Redeploy the project. Future pushes to `main` trigger new deployments. A.S.G.A.R.D. is available at `/` and `/html/study.html`.
 
-The project needs a Gemini API key and an account with API access. API usage may incur charges. Before sharing the study area, configure Cloudflare Access for the site hostname, or at minimum protect `/`, `/html/study*`, and `/api/study*`. Set Cloudflare rate limits and restrictive Gemini API quotas too. The Worker's same-origin check is not authentication.
+The project needs a Gemini API key and an account with API access. API usage may incur charges. Before sharing the study area, configure Cloudflare Access for the site hostname, or at minimum protect `/`, `/html/study*`, `/html/notes*`, and `/api/study*`. Set Cloudflare rate limits and restrictive Gemini API quotas too. The Worker's same-origin check is not authentication.
 
 Do not upload sensitive documents or material you are not allowed to share with Gemini. Review your course rules and the provider's data terms before using assessment materials.
 

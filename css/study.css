@@ -6,6 +6,21 @@
     letter-spacing: 0;
 }
 
+.study-page .fa-solid {
+    font-family: 'Font Awesome 7 Free';
+    font-weight: 900;
+}
+
+.study-page .fa-regular {
+    font-family: 'Font Awesome 7 Free';
+    font-weight: 400;
+}
+
+.study-page .fa-brands {
+    font-family: 'Font Awesome 7 Brands';
+    font-weight: 400;
+}
+
 .study-page {
     display: block;
 }
@@ -82,16 +97,19 @@
 
 .study-page-main {
     width: min(144rem, calc(100% - clamp(3rem, 8vw, 12rem)));
-    margin: 11rem auto 4rem;
-    padding: 1.6rem 0 2rem;
+    margin: 9rem auto 2.4rem;
+    padding: 0 0 1.2rem;
 }
 
 .study-heading {
     display: flex;
+    flex: 0 0 auto;
     align-items: end;
     justify-content: space-between;
     gap: 2rem;
-    margin-bottom: 2.4rem;
+    min-height: 0;
+    margin-bottom: 1.6rem;
+    padding: 0;
 }
 
 .study-kicker,
@@ -147,6 +165,45 @@
     font-size: 1.3rem;
 }
 
+.course-picker-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+}
+
+.course-picker-controls select {
+    flex: 1;
+    width: 0;
+}
+
+.course-edit-button {
+    display: inline-grid;
+    flex: 0 0 4.2rem;
+    width: 4.2rem;
+    height: 4.2rem;
+    place-items: center;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background: var(--surface-color);
+    color: var(--muted-color, var(--text-color));
+}
+
+.course-edit-button:hover {
+    border-color: var(--main-color);
+    color: var(--main-color);
+}
+
+.course-rename-status {
+    min-height: 1.6rem;
+    margin: 0;
+    color: var(--muted-color, var(--text-color));
+    font-size: 1.1rem;
+}
+
+.course-rename-status[data-state="error"] {
+    color: var(--accent-color, #ff9f43);
+}
+
 .study-layout {
     display: grid;
     grid-template-columns: minmax(25rem, 31rem) minmax(0, 1fr);
@@ -162,7 +219,7 @@
     display: flex;
     flex-direction: column;
     min-width: 0;
-    padding: 2.2rem;
+    padding: 1.8rem;
     border-right: 1px solid var(--border-color);
     background: color-mix(in srgb, var(--surface-color) 88%, transparent);
 }
@@ -217,10 +274,62 @@
 }
 
 .source-hint {
-    margin: 0.9rem 0 1.4rem;
+    margin: 0.8rem 0 1.2rem;
     color: var(--muted-color, var(--text-color));
     font-size: 1.1rem;
     line-height: 1.5;
+}
+
+.source-folder-toolbar {
+    display: grid;
+    gap: 0.6rem;
+    margin-bottom: 0.8rem;
+}
+
+.source-folder-toolbar > label {
+    color: var(--muted-color, var(--text-color));
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.source-folder-controls {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) repeat(3, 3.4rem);
+    gap: 0.4rem;
+}
+
+.source-folder-controls select,
+.source-folder-select {
+    min-width: 0;
+    height: 3.6rem;
+    padding: 0 0.7rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background: var(--surface-color);
+    color: var(--text-color);
+    font-size: 1.05rem;
+}
+
+.source-folder-action {
+    display: inline-grid;
+    width: 3.4rem;
+    height: 3.6rem;
+    place-items: center;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background: transparent;
+    color: var(--muted-color, var(--text-color));
+}
+
+.source-folder-action:hover:not(:disabled) {
+    border-color: var(--main-color);
+    color: var(--main-color);
+}
+
+.source-folder-action:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
 }
 
 .source-list {
@@ -239,7 +348,7 @@
 
 .source-item {
     display: grid;
-    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-columns: auto minmax(0, 1fr) minmax(0, 8.5rem) auto;
     align-items: center;
     gap: 0.9rem;
     min-height: 5rem;
@@ -267,6 +376,12 @@
     color: var(--muted-color, var(--text-color));
     font-family: 'Orbitron', sans-serif;
     font-size: 0.9rem;
+}
+
+.source-item .source-folder-select {
+    height: 3.2rem;
+    padding: 0 0.4rem;
+    font-size: 1rem;
 }
 
 .remove-source {
@@ -309,7 +424,7 @@
     flex-direction: column;
     min-width: 0;
     min-height: 0;
-    padding: 2rem clamp(1.6rem, 3vw, 3.2rem) 1.8rem;
+    padding: 1.7rem clamp(1.6rem, 3vw, 3.2rem) 1.5rem;
 }
 
 .mode-row {
@@ -331,9 +446,9 @@
     flex: 1;
     flex-direction: column;
     gap: 1.2rem;
-    min-height: 34rem;
+    min-height: 30rem;
     max-height: calc(100vh - 32rem);
-    padding: 2.5rem 0;
+    padding: 2rem 0;
     overflow: auto;
     overscroll-behavior: contain;
 }
@@ -580,7 +695,7 @@
 
     .study-page-main {
         width: calc(100% - 2.4rem);
-        margin-top: 9rem;
+        margin-top: 8.2rem;
     }
 
     .study-heading {

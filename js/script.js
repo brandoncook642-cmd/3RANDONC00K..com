@@ -188,7 +188,7 @@ function loadScript(src) {
     });
 }
 
-async function initializeVantaDots() {
+async function initializeVantaGlobe() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         return;
     }
@@ -203,11 +203,11 @@ async function initializeVantaDots() {
             await loadScript('https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js');
         }
 
-        if (!window.VANTA || !window.VANTA.DOTS) {
-            await loadScript('https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.dots.min.js');
+        if (!window.VANTA || !window.VANTA.GLOBE) {
+            await loadScript('https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.globe.min.js');
         }
 
-        vantaBackground = window.VANTA.DOTS({
+        vantaBackground = window.VANTA.GLOBE({
             el: '#vanta-net',
             mouseControls: true,
             touchControls: true,
@@ -216,10 +216,14 @@ async function initializeVantaDots() {
             minWidth: 200,
             scale: 1,
             scaleMobile: 1,
-            size: 3,
-            spacing: 35,
+            backgroundAlpha: 0,
             ...getVantaColors()
         });
+        const updateGlobe = vantaBackground.onUpdate.bind(vantaBackground);
+        vantaBackground.onUpdate = function () {
+            updateGlobe();
+            this.camera.lookAt(this.cont2.getWorldPosition(new window.THREE.Vector3()));
+        };
 
         document.body.classList.add('vanta-ready');
     } catch {
@@ -227,7 +231,7 @@ async function initializeVantaDots() {
     }
 }
 
-initializeVantaDots();
+initializeVantaGlobe();
 
 // Experience carousel
 const carousel = document.querySelector('.carousel');

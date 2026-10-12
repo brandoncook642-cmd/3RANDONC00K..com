@@ -9,7 +9,7 @@ window.onscroll = () => {
 //menu icon
 const menuIcon = document.querySelector('.menu-icon');
 const navbar = document.querySelector('.navbar');
-let vantaNet = null;
+let vantaBackground = null;
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
 if (!prefersReducedMotion.matches) {
@@ -172,8 +172,8 @@ function getVantaColors() {
 }
 
 function updateVantaColors() {
-    if (vantaNet) {
-        vantaNet.setOptions(getVantaColors());
+    if (vantaBackground) {
+        vantaBackground.setOptions(getVantaColors());
     }
 }
 
@@ -188,7 +188,7 @@ function loadScript(src) {
     });
 }
 
-async function initializeVantaNet() {
+async function initializeVantaDots() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         return;
     }
@@ -203,11 +203,11 @@ async function initializeVantaNet() {
             await loadScript('https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js');
         }
 
-        if (!window.VANTA || !window.VANTA.NET) {
-            await loadScript('https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.net.min.js');
+        if (!window.VANTA || !window.VANTA.DOTS) {
+            await loadScript('https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.dots.min.js');
         }
 
-        vantaNet = window.VANTA.NET({
+        vantaBackground = window.VANTA.DOTS({
             el: '#vanta-net',
             mouseControls: true,
             touchControls: true,
@@ -216,11 +216,8 @@ async function initializeVantaNet() {
             minWidth: 200,
             scale: 1,
             scaleMobile: 1,
-            backgroundAlpha: 0,
-            points: 9,
-            maxDistance: 20,
-            spacing: 22,
-            showDots: true,
+            size: 3,
+            spacing: 35,
             ...getVantaColors()
         });
 
@@ -230,7 +227,7 @@ async function initializeVantaNet() {
     }
 }
 
-initializeVantaNet();
+initializeVantaDots();
 
 // Experience carousel
 const carousel = document.querySelector('.carousel');

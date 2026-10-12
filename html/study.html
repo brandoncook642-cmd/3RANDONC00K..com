@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+        content="A.S.G.A.R.D. is an Advanced Study Guide and Rapid Developer for course sources, revision, and assessment preparation.">
+    <title>A.S.G.A.R.D. | Study Hub</title>
+    <script>
+        try {
+            document.documentElement.classList.toggle('light-mode', localStorage.getItem('theme') === 'light');
+        } catch { }
+    </script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/study.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
+</head>
+
+<body class="study-page">
+    <header class="header">
+        <a href="study.html" class="logo">A.S.G.A.R.D.</a>
+        <button class="menu-icon" type="button" aria-label="Open navigation" aria-expanded="false">
+            <i class="fa-solid fa-bars" aria-hidden="true"></i>
+        </button>
+        <button class="theme-toggle" type="button" aria-label="Toggle theme">
+            <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>
+        </button>
+        <nav class="navbar" aria-label="A.S.G.A.R.D. workspace">
+            <a href="#courses" class="active" aria-current="page">Courses</a>
+            <a href="#sources">Sources</a>
+            <a href="#study-session">Study session</a>
+        </nav>
+        <div class="button">
+            <button class="btn" id="new-course-button" type="button">New course</button>
+        </div>
+    </header>
+
+    <main class="study-page-main">
+        <section class="study-heading" id="courses">
+            <div>
+                <p class="study-kicker">ADVANCED STUDY GUIDE AND RAPID DEVELOPER</p>
+                <h1 id="course-title">My course</h1>
+            </div>
+            <label class="course-picker" for="course-select">
+                <span>ACTIVE COURSE</span>
+                <select id="course-select" aria-label="Choose a course"></select>
+            </label>
+        </section>
+
+        <div class="study-layout">
+            <aside class="source-panel" id="sources" aria-labelledby="source-title">
+                <div class="panel-heading">
+                    <div>
+                        <p class="study-kicker">LIBRARY</p>
+                        <h2 id="source-title">Course sources</h2>
+                    </div>
+                    <span class="source-count" id="source-count">0</span>
+                </div>
+                <button class="add-files-button" id="add-files-button" type="button">
+                    <i class="fa-solid fa-arrow-up-from-bracket" aria-hidden="true"></i>
+                    Add sources
+                </button>
+                <input id="source-input" type="file" accept=".pdf,.txt,.md,application/pdf,text/plain,text/markdown"
+                    multiple hidden>
+                <p class="source-hint">PDF, TXT, or Markdown. Up to 5 MB per file.</p>
+                <div class="source-list" id="source-list" aria-live="polite"></div>
+                <div class="privacy-note">
+                    <i class="fa-solid fa-lock" aria-hidden="true"></i>
+                    <p>Files stay in this browser. Selected sources are sent to Gemini only when you ask.</p>
+                </div>
+            </aside>
+
+            <section class="study-room" id="study-session" aria-label="Study session">
+                <div class="mode-row">
+                    <label for="study-mode">STUDY MODE</label>
+                    <select id="study-mode">
+                        <option value="explain">Explain a concept</option>
+                        <option value="quiz">Practice quiz</option>
+                        <option value="flashcards">Flashcards</option>
+                        <option value="assessment">Assessment support</option>
+                    </select>
+                </div>
+                <div class="conversation" id="conversation" role="log" aria-live="polite" aria-relevant="additions">
+                    <div class="welcome-message" id="welcome-message">
+                        <span class="welcome-index">STUDY SESSION / 01</span>
+                        <h2>What are you working on?</h2>
+                        <p>Add course material, then ask for an explanation, a quiz, or help unpacking assessment
+                            criteria.</p>
+                        <div class="starter-prompts" aria-label="Suggested study prompts">
+                            <button type="button"
+                                data-prompt="Explain the key ideas in my selected sources and cite the pages.">Explain
+                                key ideas</button>
+                            <button type="button"
+                                data-prompt="Quiz me on the selected sources, one question at a time. Wait for my answer before revealing the explanation.">Quiz
+                                me</button>
+                            <button type="button"
+                                data-prompt="Help me understand the assessment criteria in my selected sources. Ask questions that help me plan my own response.">Understand
+                                a rubric</button>
+                        </div>
+                    </div>
+                </div>
+                <form class="question-composer" id="question-form">
+                    <label class="visually-hidden" for="question-input">Your study question</label>
+                    <textarea id="question-input" name="question" rows="2" maxlength="1200"
+                        placeholder="Ask about your selected sources..." required></textarea>
+                    <div class="composer-footer">
+                        <span id="selection-status">Select at least one source</span>
+                        <button class="send-button" id="send-button" type="submit" aria-label="Send question"
+                            title="Send question" disabled>
+                            <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </main>
+
+    <dialog class="course-dialog" id="course-dialog">
+        <form id="course-form">
+            <p class="study-kicker">NEW WORKSPACE</p>
+            <h2>Add a course</h2>
+            <label for="course-name">Course name</label>
+            <input id="course-name" name="courseName" maxlength="80" required>
+            <div class="dialog-actions">
+                <button class="secondary-button" id="cancel-course-button" type="button">Cancel</button>
+                <button class="add-files-button" type="submit">Create course</button>
+            </div>
+        </form>
+    </dialog>
+    <p class="visually-hidden" id="study-status" role="status" aria-live="polite"></p>
+    <script src="../js/script.js"></script>
+    <script src="../js/study.js"></script>
+</body>
+
+</html>

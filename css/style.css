@@ -498,7 +498,7 @@ section {
 
 @keyframes portraitNetOrbit {
     0% {
-        transform: translate(-50%, -50%) rotate(0deg);
+        transform: translate(-50%, -50%) perspective(800px) rotateX(58deg) rotateY(-14deg) rotateZ(0deg);
         filter: drop-shadow(0 0 2px var(--main-color));
     }
 
@@ -507,7 +507,7 @@ section {
     }
 
     100% {
-        transform: translate(-50%, -50%) rotate(360deg);
+        transform: translate(-50%, -50%) perspective(800px) rotateX(58deg) rotateY(-14deg) rotateZ(360deg);
         filter: drop-shadow(0 0 2px var(--main-color));
     }
 }
@@ -3380,8 +3380,15 @@ section.experience > p {
         to { opacity: 0.65; transform: translateX(-100vw); }
     }
 
+    .portrait-frame img,
+    .headshot-img img {
+        position: relative;
+        z-index: 1;
+    }
+
     .portrait-orbit,
     .headshot-img .circle-spin {
+        z-index: 0;
         border: 0.4rem solid var(--border-color);
         border-right-color: var(--main-color);
         border-left-color: var(--main-color);
@@ -3825,3 +3832,247 @@ section.experience > p {
         padding-left: 1.2rem;
     }
 }
+
+.portrait-frame,
+.about .headshot-img {
+    --frame-clip: circle(50% at 50% 50%);
+    --orbit-stroke: 2px;
+    --orbit-gap: 2px;
+    --orbit-outset: calc(var(--orbit-stroke) + var(--orbit-gap));
+    display: grid;
+    place-items: center;
+    position: relative;
+    isolation: isolate;
+    width: min(95%, 38rem);
+    height: auto;
+    aspect-ratio: 1;
+    margin: 0 auto;
+    overflow: visible;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    box-shadow: none;
+}
+
+.portrait-frame::before,
+.about .headshot-img::before {
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    border-radius: 50%;
+    background: transparent;
+    clip-path: var(--frame-clip);
+    filter: drop-shadow(0 0 5px color-mix(in srgb, var(--main-color) 32%, transparent));
+    content: '';
+    pointer-events: none;
+}
+
+.portrait-frame img,
+.about .headshot-img img {
+    position: absolute;
+    z-index: 2;
+    inset: 0.65rem;
+    display: block;
+    width: calc(100% - 1.3rem);
+    height: calc(100% - 1.3rem);
+    box-sizing: border-box;
+    object-fit: cover;
+    object-position: center;
+    border: 0.45rem solid #eef3f6;
+    border-radius: 50%;
+    box-shadow: var(--shadow-soft);
+    clip-path: var(--frame-clip);
+}
+
+.portrait-frame::after,
+.about .headshot-img::after {
+    --trace-outset: 3rem;
+    position: absolute;
+    z-index: 1;
+    inset: calc(-1 * var(--trace-outset));
+    border: 0;
+    border-radius: 50%;
+    background-color: transparent;
+    background-image: url('../images/portrait-circuit-frame.svg?v=4');
+    background-position: center;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    transform-origin: center;
+    animation: portraitOuterTurn 18s ease-in-out infinite alternate;
+    filter: drop-shadow(0 0 4px color-mix(in srgb, var(--main-color) 55%, transparent));
+    opacity: 1;
+    content: '';
+    pointer-events: none;
+}
+
+.portrait-orbit,
+.about .headshot-img .circle-spin {
+    top: 50%;
+    left: 50%;
+    right: auto;
+    z-index: 1;
+    width: calc(100% + 8px);
+    height: calc(100% + 8px);
+    aspect-ratio: auto;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    clip-path: circle(50% at 50% 50%);
+    opacity: 1;
+    filter: none;
+    animation: none;
+    pointer-events: none;
+}
+
+.portrait-orbit::before,
+.about .headshot-img .circle-spin::before {
+    --ring-angle: 0deg;
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    clip-path: circle(50% at 50% 50%);
+    background: conic-gradient(from var(--ring-angle), transparent 0deg 300deg, rgba(255, 255, 255, 0.18) 315deg, rgba(255, 255, 255, 0.7) 330deg, #fff 335deg 345deg, rgba(255, 255, 255, 0.5) 355deg, transparent 360deg);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    content: '';
+    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.35));
+    animation: portraitFrameSweep 18s ease-in-out infinite alternate;
+}
+
+@property --ring-angle {
+    syntax: '<angle>';
+    inherits: false;
+    initial-value: 0deg;
+}
+
+@keyframes portraitFrameSweep {
+    from {
+        --ring-angle: 0deg;
+    }
+
+    to {
+        --ring-angle: 180deg;
+    }
+}
+
+@keyframes portraitOuterTurn {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(180deg);
+    }
+}
+.home-content h1 .home-name {
+    position: relative;
+    display: inline-block;
+    color: transparent;
+    font-style: normal;
+    white-space: nowrap;
+}
+
+.home-content h1 .home-name-copy {
+    display: inline-block;
+    color: transparent;
+    transform-origin: left center;
+    animation: nameCopyResolve 1.8s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.home-content h1 .home-name-path {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
+}
+
+.home-content h1 .home-name-path text {
+    fill: none;
+    stroke: var(--main-color);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    font-family: inherit;
+    font-size: 200px;
+    font-weight: 600;
+    transform-box: fill-box;
+    transform-origin: center;
+}
+
+.home-content h1 .name-outline text {
+    stroke-width: 1.8px;
+    stroke-dasharray: none;
+    opacity: 0;
+    filter: drop-shadow(0 0 3px color-mix(in srgb, var(--main-color) 48%, transparent));
+    animation: nameWireMorph 1.8s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+@keyframes nameWireMorph {
+    0% {
+        opacity: 0;
+        transform: translateX(-0.015em) scaleX(0.97);
+    }
+
+    24% {
+        opacity: 0.85;
+        transform: translateX(0) scaleX(0.995);
+    }
+
+    48% {
+        opacity: 1;
+        transform: translateX(0.008em) scaleX(1.008);
+    }
+
+    68% {
+        opacity: 0.9;
+        transform: translateX(0) scaleX(1);
+    }
+
+    78% {
+        opacity: 0.55;
+    }
+
+    88% {
+        opacity: 0.18;
+    }
+
+    96%, 100% {
+        opacity: 0;
+        transform: translateX(0) scaleX(1);
+    }
+}
+
+@keyframes nameCopyResolve {
+    0%, 70% {
+        color: transparent;
+        transform: scaleX(0.985);
+    }
+
+    90% {
+        color: var(--main-color);
+        transform: scaleX(1.006);
+    }
+
+    100% {
+        color: var(--main-color);
+        transform: scaleX(1);
+    }
+}
+
+@keyframes portraitOuterTurn {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(180deg);
+    }
+}
+

@@ -1,4 +1,4 @@
-?//scroll sections
+//scroll sections
 window.onscroll = () => {
     //sticky header
     let header = document.querySelector('header');
@@ -285,7 +285,7 @@ chatDialog.setAttribute('aria-labelledby', 'portfolio-chat-title');
 chatDialog.innerHTML = `
     <header class="portfolio-chat-header">
         <div>
-            <p class="portfolio-chat-kicker">BRANDON'S PORTFOLIO</p>
+            <p class="portfolio-chat-kicker">Hello there!</p>
             <h2 id="portfolio-chat-title">How can I help?</h2>
         </div>
         <button class="portfolio-chat-close" type="button" aria-label="Close chat">
@@ -320,10 +320,10 @@ const chatInput = chatDialog.querySelector('#portfolio-chat-input');
 const chatStatus = chatDialog.querySelector('.portfolio-chat-status');
 const chatHistory = [];
 const quickAnswers = new Map([
-    ['what experience do i have', 'I have 8 years of hospitality experience, working at Columbus Coffee, Four Points by Sheraton Auckland, Novotel Tainui Hamilton, and Ibis Tainui Hamilton. My roles c[...]
-    ['what are my technical skills', 'My listed hospitality and operations skills include Micros Simphony POS, cash handling, stock ordering through online portals such as PurchasePlus, Microsoft Exce[...]
-    ['what am i studying', 'I am studying toward a Level 5 Certificate in Information Technology at Waikato Institute of Technology. My four modules cover IT operations, Python programming, interactiv[...]
-    ['what it skills am i learning', 'I am learning PC hardware and software, operating systems, networking, IT security and troubleshooting, Python, HTML and CSS, user experience and interface design[...]
+    ['what experience do i have', 'I have 8 years of hospitality experience, working at Columbus Coffee, Four Points by Sheraton Auckland, Novotel Tainui Hamilton, and Ibis Tainui Hamilton. My roles covered cafe and food-and-beverage service. [Experience]'],
+    ['what are my technical skills', 'My listed hospitality and operations skills include Micros Simphony POS, cash handling, stock ordering through online portals such as PurchasePlus, Microsoft Excel for stocktakes and invoices, barista training, and beverage service. [Skills]'],
+    ['what am i studying', 'I am studying toward a Level 5 Certificate in Information Technology at Waikato Institute of Technology. My four modules cover IT operations, Python programming, interactive digital media, and information systems. [Education]'],
+    ['what it skills am i learning', 'I am learning PC hardware and software, operating systems, networking, IT security and troubleshooting, Python, HTML and CSS, user experience and interface design, and information systems. [Education]'],
     ['have i led a team', 'Yes. My Skills page says I led 3-4 staff per shift and delegated tasks during service. [Skills]'],
     ['what is my career goal', 'I hope to work in web design and create high-quality websites for businesses and personal use that are easy for clients to use. [About]']
 ]);
@@ -388,12 +388,26 @@ chatForm.addEventListener('submit', async (event) => {
     chatMessages.scrollTop = chatMessages.scrollHeight;
 
     try {
+        if (window.location.protocol === 'file:') {
+            throw new Error('Chat answers need the Cloudflare Worker. Open the deployed site or run `npx wrangler pages dev .` from the website folder.');
+        }
+
         const response = await fetch('/api/chat', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ message, history: chatHistory.slice(-8) })
         });
-        const result = await response.json();
+        const responseText = await response.text();
+        let result;
+
+        try {
+            result = JSON.parse(responseText);
+        } catch {
+            const errorMessage = response.status === 403
+                ? 'The chat request was forbidden. Check that the Cloudflare Pages Worker is deployed and that you are opening the hosted site.'
+                : `The chat service returned an unexpected response (HTTP ${response.status}).`;
+            throw new Error(errorMessage);
+        }
 
         if (!response.ok) {
             throw new Error(result.error || 'The chat service is unavailable.');
